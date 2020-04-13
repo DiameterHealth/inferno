@@ -384,8 +384,9 @@ module Inferno
           versions :r4
         end
 
-        skip 'No DocumentReference resources appear to be available. Please use patients with more information.' unless @resources_found
-        test_resources_against_profile('DocumentReference')
+        # skip 'No DocumentReference resources appear to be available. Please use patients with more information.' unless @resources_found
+        # test_resources_against_profile('DocumentReference')
+        skip 'Skipped due to Issue - https://github.com/onc-healthit/inferno/issues/449' 
       end
 
       test 'All must support elements are provided in the DocumentReference resources returned.' do
@@ -481,9 +482,10 @@ module Inferno
         end
 
         skip_if_known_not_supported(:DocumentReference, [:search, :read])
-        skip 'No DocumentReference resources appear to be available. Please use patients with more information.' unless @resources_found
+        # skip 'No DocumentReference resources appear to be available. Please use patients with more information.' unless @resources_found
 
-        validate_reference_resolutions(@document_reference)
+        # validate_reference_resolutions(@document_reference)
+        skip 'Practioner and Organization not implemented'
       end
     end
   end
