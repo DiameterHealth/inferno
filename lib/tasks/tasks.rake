@@ -420,12 +420,14 @@ namespace :inferno do |_argv|
   task :execute_batch, [:config] do |_task, args|
     file = File.read(args.config)
     config = JSON.parse(file)
+    Inferno::StartupTasks.load_all_modules
 
     instance = Inferno::Models::TestingInstance.new(
       url: config['server'],
       selected_module: config['module'],
       initiate_login_uri: 'http://localhost:4568/launch',
-      redirect_uris: 'http://localhost:4568/redirect'
+      redirect_uris: 'http://localhost:4568/redirect',
+      token: config['token']
     )
     instance.save!
     client = FHIR::Client.new(config['server'])
